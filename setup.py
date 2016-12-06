@@ -42,8 +42,8 @@ else:
         ('share/diamond/user_scripts', []),
     ]
 
-    distro = platform.dist()[0]
-    distro_major_version = platform.dist()[1].split('.')[0]
+    distro = platform.dist(supported_dists=['system'])[0]
+    distro_major_version = platform.dist(supported_dists=['system'])[1].split('.')[0]
 
     if running_under_virtualenv():
         data_files.append(('etc/diamond',
@@ -63,7 +63,7 @@ else:
         if distro == 'Ubuntu':
             data_files.append(('/etc/init',
                                ['debian/diamond.upstart']))
-        if distro in ['centos', 'redhat', 'debian', 'fedora', 'oracle']:
+        if distro in ['centos', 'redhat', 'debian', 'fedora', 'oracle', 'system']:
             data_files.append(('/etc/init.d',
                                ['bin/init.d/diamond']))
             data_files.append(('/var/log/diamond',
